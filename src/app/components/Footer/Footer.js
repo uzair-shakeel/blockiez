@@ -9,7 +9,7 @@ const Footer = () => {
       <div className={styles.div}>
         <div className={styles.profile}>
           <Image
-            src={profilePic}
+            src={profilePic} 
             alt="Profile Picture"
             className={styles.image}
           />

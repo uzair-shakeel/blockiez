@@ -35,7 +35,7 @@ const Details = () => {
   }, [inView]);
 
   return (
-    <div>
+    <div className="">
       <div ref={ref} className={styles.gridContainer}>
         <div className={styles.imageContainer}>
           <img
@@ -44,7 +44,7 @@ const Details = () => {
             alt="Sign up illustration"
           />
         </div>
-        <div className="absolute top-1/2 left-1/2 translate-x-1/2 h-full">
+        <div className="absolute top-[40%] lg:top-1/2 left-1/2 translate-x-1/2 h-full">
           <div className="absolute w-[30px] h-[30px] rounded-full -left-2 bg-[#006cd0] z-[50]"></div>
           <span className="absolute w-[8px] h-full bg-gray-200 top-2 left-1/2 translate-x-1/2 z-[40]"></span>
           {inView && (
@@ -76,7 +76,7 @@ const Details = () => {
             veniam consequat sunt nostrud amet.
           </p>
         </div>
-        <div className="absolute top-1/2 left-1/2 translate-x-1/2 h-full">
+        <div className="absolute top-[40%] lg:top-1/2 left-1/2 translate-x-1/2 h-full">
           <div className="absolute w-[30px] h-[30px] rounded-full -left-2 bg-[#006cd0] z-[50]"></div>
           <span className="absolute w-[8px] h-full bg-gray-200 top-2 left-1/2 translate-x-1/2 z-[40]"></span>
           {inView && (
