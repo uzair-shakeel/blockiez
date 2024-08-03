@@ -8,7 +8,6 @@
   font-size: 14px;
   line-height: 20px;
   font-weight: 600;
-  gap: 10%;
 }
 
 .content {
@@ -39,57 +38,214 @@
   font-weight: 400;
 }
 
+.scrollWrapHero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 20px;
+  height: 300px;
+  margin-right: 20px;
+}
+
+.scrollBase {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 100%;
+  background: #e0e0e0;
+  transform: translateX(-50%);
+}
+
+.scrollAnimate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 100%;
+  background: #0070f3;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 2s ease-in-out infinite;
+  transform: translateX(-50%);
+}
+
+@keyframes scrollAnimation {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.scrollAnimate {
+  animation: scrollAnimation 2s linear infinite;
+}
+
+.dots {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* transform: translateY(-50%); */
+}
+
+.dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  /* background-color: #e0e0e0; */
+  background: #0070f3;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 2s ease-in-out infinite;
+  transform: translateX(-50%);
+}
+
+.dot:nth-child(1) {
+  animation: dotAnimation 1.2s linear infinite;
+  animation-delay: 4s;
+}
+
+.dot:nth-child(2) {
+  animation: dotAnimation 1.2s linear infinite;
+}
+
+.dot:nth-child(3) {
+  animation: dotAnimation 1s linear infinite;
+}
+
+@keyframes dotAnimation {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+/* .dots {
+  animation: dotAnimation 2s linear infinite;
+} */
 .stepsContainer {
+  position: relative;
   display: flex;
   align-items: center;
+  height: 400px; /* Adjust height as needed */
+}
+
+.verticalLine {
   position: relative;
+  width: 7px;
+  height: 100%;
+  background: #dddddd6e;
+  margin-right: 20px;
+}
+
+.progressLine {
+  position: absolute;
   width: 100%;
+  height: 0;
+  background: #006cd0;
+  transition: height 2s linear;
+}
+
+.fillAnimation {
+  animation: fillLine 2s linear forwards;
+}
+
+.hold {
+  /* Keep the height at 100% and stop the animation */
+  height: 100% !important;
+  animation: none; /* Stop animation */
+}
+
+.resumeAnimation {
+  /* To resume animation, reapply animation */
+  animation: fillLine 2s linear forwards;
 }
 
 .steps {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   height: 100%;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-  /* background: #000; */
-  position: relative;
-}
-.step1 {
-  padding: 5%;
-  border-radius: 10px;
-  position: absolute;
-  left: 10%;
-  top: 0;
-  color: #006cd0;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); /* Added box shadow */
 }
 
-.step2 {
-  padding: 5%;
-  border-radius: 10px;
-  position: absolute;
-  right: 10%;
-  top: 40%;
-  color: #006cd0;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); /* Added box shadow */
+.step {
+  display: flex;
+  align-items: center;
+  position: relative;
 }
-.step3 {
-  padding: 5%;
-  border-radius: 10px;
+
+.circle {
+  width: 16px;
+  height: 16px;
+  background: #f4f1f1;
+  border-radius: 50%;
   position: absolute;
-  left: 10%;
-  bottom: 0;
-  color: #006cd0;
-  font-weight: 700;
-  letter-spacing: 2px;
+  left: -31.9px;
+  z-index: 1;
+  transition: background-color 0s ease;
+}
+
+.circle1 {
+  top: -1px;
+  background: #006cd0;
+}
+
+.circle2 {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.circle3 {
+  bottom: -1px;
+}
+
+.step span {
+  margin-left: 10px;
+  padding: 15px;
+  width: max-content;
+  background-color: #dddddd6e;
+  border-radius: 16px;
   text-transform: uppercase;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); /* Added box shadow */
+  letter-spacing: 0.5px;
+  color: #006cd0;
+}
+
+/* Circle fill state */
+.filled {
+  background: #006cd0;
+}
+
+.firstStep {
+  background-color: white !important;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Customize shadow as needed */
+}
+
+.leftSide {
+  position: relative;
+  right: 150px;
+}
+
+.step.filled span {
+  background-color: white !important;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Customize shadow as needed */
+}
+
+@keyframes fillLine {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 100%;
+  }
 }

@@ -1,31 +1,76 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styles from "./Hero.module.css";
-import { motion } from "framer-motion";
 
 const HeroSection = () => {
-  const [isAnimating, setIsAnimating] = useState(true);
-
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIsAnimating(false);
-      setTimeout(() => {
-        setIsAnimating(true);
-      }, 900); // Delay between loops
-    }, 2500); // Duration of one complete cycle
+    const progressLine = document.querySelector(`.${styles.progressLine}`);
+    const circles = [
+      document.querySelector(`.${styles.circle2}`),
+      document.querySelector(`.${styles.circle3}`),
+    ];
+    const steps = [
+      document.querySelector(`.${styles.step}:nth-child(2) span`), // Step 02
+      document.querySelector(`.${styles.step}:nth-child(3) span`), // Step 03
+    ];
+
+    let animationPaused = false;
+
+    const handleAnimation = () => {
+      const containerHeight = progressLine.parentElement.offsetHeight;
+      const height = progressLine.offsetHeight;
+      const isNearEnd = height >= containerHeight * 0.999;
+
+      // Add or remove filled class
+      circles.forEach((circle, index) => {
+        const circlePosition = (index + 1) * (containerHeight / 2.1);
+        if (height >= circlePosition) {
+          circle.classList.add(styles.filled);
+        } else {
+          circle.classList.remove(styles.filled);
+        }
+      });
+
+      // Add or remove styling for steps
+      steps.forEach((step, index) => {
+        const stepPosition = (index + 1) * (containerHeight / 2.1);
+        if (height >= stepPosition) {
+          step.style.backgroundColor = "white";
+          step.style.boxShadow = "0px 4px 8px rgba(0, 0, 0, 0.1)";
+        } else {
+          step.style.backgroundColor = ""; // Reset to default
+          step.style.boxShadow = ""; // Reset to default
+        }
+      });
+
+      // Control animation pause and resume
+      if (isNearEnd && !animationPaused) {
+        animationPaused = true;
+        // Pause the animation and hold at current height
+        progressLine.classList.add(styles.hold);
+        setTimeout(() => {
+          // Remove the hold class to resume the animation
+          progressLine.classList.remove(styles.hold);
+          progressLine.offsetHeight; // Trigger reflow
+          progressLine.classList.add(styles.resumeAnimation);
+          setTimeout(() => {
+            progressLine.classList.remove(styles.resumeAnimation);
+          }, 10); // Small delay to ensure the class is applied
+        }, 800); // Pause for 0.8 seconds
+      } else if (!isNearEnd) {
+        animationPaused = false;
+        progressLine.classList.remove(styles.hold, styles.resumeAnimation);
+        // Reapply animation if needed
+        progressLine.classList.add(styles.fillAnimation);
+      }
+    };
+
+    handleAnimation(); // Initial call
+
+    const interval = setInterval(handleAnimation, 50); // Update every 50ms
 
     return () => clearInterval(interval);
   }, []);
-
-  const lineVariants = {
-    initial: { height: 0 },
-    animate: { height: "100%" },
-  };
-
-  const circleVariants = {
-    initial: { height: 0 },
-    animate: { height: "20px" },
-  };
 
   return (
     <section className={styles.heroSection}>
@@ -39,40 +84,26 @@ const HeroSection = () => {
         </p>
       </div>
       <div className={styles.stepsContainer}>
-        <div className="absolute top-0 left-1/2 translate-x-1/2 h-full">
-          <div className="absolute w-[20px] h-[20px] rounded-full -left-[2px] bg-[#006cd0] z-[50]"></div>
-          <span className="absolute w-[8px] h-full bg-gray-200 top-2 left-1/2 translate-x-1/2 z-[40]"></span>
-          {isAnimating && (
-            <>
-              <motion.span
-                initial="initial"
-                animate="animate"
-                variants={lineVariants}
-                transition={{ duration: 0.9 }}
-                className="absolute w-[8px] h-full bg-[#006cd0] top-2 left-1/2 translate-x-1/2 z-[40]"
-              ></motion.span>
-
-              <motion.div
-                initial="initial"
-                animate="animate"
-                variants={circleVariants}
-                transition={{ duration: 0.2, delay: 0.3 }}
-                className="absolute w-[20px] h-[20px] rounded-full top-[48%] -left-[2px] bg-[#006cd0] z-[50]"
-              ></motion.div>
-              <motion.div
-                initial="initial"
-                animate="animate"
-                variants={circleVariants}
-                transition={{ duration: 0.2, delay: 0.7 }}
-                className="absolute w-[20px] h-[20px] rounded-full top-[99%] -left-[2px] bg-[#006cd0] z-[50]"
-              ></motion.div>
-            </>
-          )}
+        <div className={styles.verticalLine}>
+          <div
+            className={`${styles.progressLine} ${styles.fillAnimation}`}
+          ></div>
         </div>
         <div className={styles.steps}>
-          <div className={styles.step1}>STEP 01</div>
-          <div className={styles.step2}>STEP 02</div>
-          <div className={styles.step3}>STEP 03</div>
+          <div className={styles.step}>
+            <span className={`${styles.leftSide} ${styles.firstStep}`}>
+              Step 01
+            </span>
+            <div className={`${styles.circle} ${styles.circle1}`}></div>
+          </div>
+          <div className={styles.step}>
+            <div className={`${styles.circle} ${styles.circle2}`}></div>
+            <span>Step 02</span>
+          </div>
+          <div className={styles.step}>
+            <span className={styles.leftSide}>Step 03</span>
+            <div className={`${styles.circle} ${styles.circle3}`}></div>
+          </div>
         </div>
       </div>
     </section>
