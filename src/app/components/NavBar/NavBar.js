@@ -4,7 +4,7 @@ import styles from "./NavBar.module.css";
 import { useState } from "react";
 
 const NavBar = () => {
-  const [open, setopen] = useState(true);
+  const [open, setopen] = useState(false);
   return (
     <>
       <nav className={styles.navbar}>
