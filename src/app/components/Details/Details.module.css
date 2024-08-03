@@ -5,6 +5,11 @@
   gap: 15%;
   padding: 15px 8%;
 }
+.imageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 /* 
 .image {
   grid-column: 1 / span 1;
@@ -21,6 +26,7 @@
   color: #006cd0;
   font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .heading {
