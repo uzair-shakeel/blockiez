@@ -1,0 +1,37 @@
+/* components/NavBar.module.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10%;
+  background-color: #f8f9fa;
+  /* max-width: 1080px; */
+  letter-spacing: 2px;
+}
+
+.brand {
+  font-size: 16px;
+  /* font-family: poppins; */
+  font-weight: 800;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+}
+
+.resources {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #006cd0;
+}
+
+.cloneButton {
+  color: white;
+  border: none;
+
+  cursor: pointer;
+  padding: 14px 24px;
+  border-radius: 6px;
+  background-color: #006cd0;
+}
