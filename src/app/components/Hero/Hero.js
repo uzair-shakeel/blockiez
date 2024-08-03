@@ -37,9 +37,11 @@ const HeroSection = () => {
         if (height >= stepPosition) {
           step.style.backgroundColor = "white";
           step.style.boxShadow = "0px 4px 8px rgba(0, 0, 0, 0.1)";
+          step.style.color = "#006cd0";
         } else {
           step.style.backgroundColor = ""; // Reset to default
           step.style.boxShadow = ""; // Reset to default
+          step.style.color = "#70768A";
         }
       });
 
