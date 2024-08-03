@@ -51,7 +51,7 @@ const Details = () => {
             <motion.span
               initial={{ height: 0 }}
               animate={{ height: "100%" }}
-              transition={{ duration: 2 }}
+              transition={{ duration: 2, delay: 0.8 }}
               className="absolute w-[8px] h-full bg-[#006cd0] top-2 left-1/2 translate-x-1/2 z-[40]"
             ></motion.span>
           )}
@@ -83,7 +83,7 @@ const Details = () => {
             <motion.span
               initial={{ height: 0 }}
               animate={{ height: "100%" }}
-              transition={{ duration: 2, delay: 2 }}
+              transition={{ duration: 2, delay: 3.2 }}
               className="absolute w-[8px] h-full bg-[#006cd0] top-2 left-1/2 translate-x-1/2 z-[40]"
             ></motion.span>
           )}

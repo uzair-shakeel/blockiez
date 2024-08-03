@@ -33,6 +33,9 @@
   font-size: 62px;
   line-height: 1.25;
   font-weight: 500;
+  @media (max-width: 990px) {
+    font-size: 32px;
+  }
 }
 
 .para {
